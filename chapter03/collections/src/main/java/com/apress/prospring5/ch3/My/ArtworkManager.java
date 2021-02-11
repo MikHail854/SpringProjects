@@ -41,6 +41,12 @@ public class ArtworkManager implements ArtworkSender {
         ArtworkManager manager = (ArtworkManager) ctx.getBean("artworkManager");
         manager.list.add("Is main");
         manager.list.forEach(obj -> System.out.println(obj));
+
+
+        SecondClass secondClass = (SecondClass) ctx.getBean("secondClass");
+        secondClass.addNewElementList(manager.list);
+        manager.list.forEach(obj -> System.out.println(obj));
+
         ctx.close();
 
     }
