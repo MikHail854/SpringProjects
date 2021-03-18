@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+
 @Component("johnMayer")
 @DependsOn("gopher")
 public class Singer implements ApplicationContextAware {
@@ -19,11 +20,10 @@ public class Singer implements ApplicationContextAware {
 
     private Guitar guitar;
 
-    public Singer(){
-    }
+    public Singer(){}
 
-    public void sign(){
+    public void sing(){
         guitar = applicationContext.getBean("gopher", Guitar.class);
-        guitar.sign();
+        guitar.sing();
     }
 }

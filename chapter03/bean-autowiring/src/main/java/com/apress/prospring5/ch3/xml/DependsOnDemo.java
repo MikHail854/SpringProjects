@@ -10,7 +10,7 @@ public class DependsOnDemo {
         ctx.refresh();
 
         Singer johnMayer = ctx.getBean("johnMayer", Singer.class);
-        johnMayer.sign();
+        johnMayer.sing();
 
         ctx.close();
     }
