@@ -1,6 +1,7 @@
 package com.apress.prospring5.ch4;
 
 import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class Singer {
@@ -49,7 +50,7 @@ public class Singer {
 
     }
 
-    private static Singer getBean(String beanName, GenericXmlApplicationContext ctx) {
+    public static Singer getBean(String beanName, ApplicationContext ctx) {
         try {
             Singer bean = (Singer) ctx.getBean(beanName);
             System.out.println(bean);
