@@ -13,7 +13,7 @@ public class DestructiveBeanWithJSR250 {
     private String filePath;
 
     @PostConstruct
-    public void afterProperties() throws Exception{
+    public void afterPropertiesSet() throws Exception{
         System.out.println("Initializing bean");
 
         if (filePath == null){
