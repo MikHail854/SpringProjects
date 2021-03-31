@@ -20,7 +20,7 @@ public class ResourceDemo {
         Resource res2 = ctx.getResource("classpath:test.txt");
         displayInfo(res2);
 
-        Resource res3 = ctx.getResource("http///www.google.com");
+        Resource res3 = ctx.getResource("http:///www.google.com");
         displayInfo(res3);
 
     }
