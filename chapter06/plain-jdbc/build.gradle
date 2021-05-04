@@ -1,0 +1,19 @@
+dependencies {
+	//compile db.mysql
+	//compile db.postgresql
+	compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+
+	// https://mvnrepository.com/artifact/org.postgresql/postgresql
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'
+
+
+}
+
+jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch6.PlainJdbcDemo",
+				"Class-Path"         : configurations.compile.collect { it.getName() }.join(' '))
+	}
+}
