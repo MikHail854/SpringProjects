@@ -16,9 +16,7 @@ public class PlainSingerDao implements SingerDao{
 
     static {
         try {
-            //Class.forName("com.mysql.cj.jdbc.Driver");
             Class.forName("org.postgresql.Driver");
-            //Class.forName("org.h2.Driver");
 
         }catch (ClassNotFoundException ex){
             logger.error("Problem loading DB dDriver", ex);
@@ -27,7 +25,7 @@ public class PlainSingerDao implements SingerDao{
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/musicdb/musicdb_schema?useSSL=true",
+                "jdbc:postgresql://localhost:5432/musicdb?useSSL=true",
                 "prospring5", "prospring5");
     }
 
@@ -48,8 +46,7 @@ public class PlainSingerDao implements SingerDao{
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement("select * from singer");
-            //PreparedStatement statement = connection.prepareStatement("select * from information_schema.ADMINISTRABLE_ROLE_AUTHORIZATIONS");
+            PreparedStatement statement = connection.prepareStatement("select * from musicdb_schema.singer");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 Singer singer = new Singer();
@@ -89,7 +86,9 @@ public class PlainSingerDao implements SingerDao{
         try{
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(
-                    "insert into singer (FIRST_NAME, LAST_NAME, BIRTH_DATE) VALUES (?, ?, ?)",
+                    "insert into musicdb_schema.singer (first_name, " +
+                            "last_name," +
+                            "birth_date) VALUES (?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, singer.getFirstName());
             statement.setString(2, singer.getLastName());
@@ -117,7 +116,7 @@ public class PlainSingerDao implements SingerDao{
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement("delete from music.singer where ID=?");
+            PreparedStatement statement = connection.prepareStatement("delete from musicdb_schema.singer where ID=?");
             statement.setLong(1, singerId);
             statement.execute();
             statement.close();

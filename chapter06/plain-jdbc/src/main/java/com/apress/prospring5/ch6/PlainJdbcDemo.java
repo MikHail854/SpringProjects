@@ -23,9 +23,7 @@ public class PlainJdbcDemo {
 
         Singer singer = new Singer();
         singer.setFirstName("Ed");
-
         singer.setLastName("Sherman");
-
         singer.setBirthDate(new Date((new GregorianCalendar(1991, 2, 119).getTime().getTime())));
         singerDao.insert(singer);
 

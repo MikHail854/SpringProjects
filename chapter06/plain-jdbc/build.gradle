@@ -1,7 +1,7 @@
 dependencies {
 	//compile db.mysql
 	//compile db.postgresql
-	compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+	//compile 'postgresql:postgresql:9.1-901-1.jdbc4'
 
 	// https://mvnrepository.com/artifact/org.postgresql/postgresql
 	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'
