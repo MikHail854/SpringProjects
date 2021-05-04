@@ -33,7 +33,7 @@ public class PlainJdbcDemo {
 
         logger.info("-------------");
         logger.info("Deleting the previous created singer");
-        //singerDao.delete(singer.getId());
+        singerDao.delete(singer.getId());
         logger.info("Listing singer data after singer deletes:");
         listAllSingers();
 
