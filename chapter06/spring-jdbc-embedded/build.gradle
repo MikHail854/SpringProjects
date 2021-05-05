@@ -1,6 +1,9 @@
 dependencies {
 	compile project(':chapter06:plain-jdbc')
 	compile db.h2, db.derby
+
+	// https://mvnrepository.com/artifact/org.postgresql/postgresql
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'
 }
 
 jar {
