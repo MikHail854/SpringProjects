@@ -37,6 +37,7 @@ ext {
 	thymeSecurityVersion = '3.0.2.RELEASE'
 	jQueryVersion = '3.2.1'
 	twsVersion = '9.0.0.M22'
+	postgresqlVersion = '42.2.20'
 
 	//persistency libraries
 	hibernateVersion = '5.2.10.Final'
@@ -166,7 +167,8 @@ ext {
 	]
 
 	db = [
-			mysql : "mysql:mysql-connector-java:$mysqlVersion",
+			//mysql : "mysql:mysql-connector-java:$mysqlVersion",
+			postgresql: "postgresql:postgresql:9.1-901-1.jdbc4",
 			derby : "org.apache.derby:derby:$derbyVersion",
 			dbcp2 : "org.apache.commons:commons-dbcp2:$dbcpVersion",
 			dbcp  : "commons-dbcp:commons-dbcp:1.4",
