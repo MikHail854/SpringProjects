@@ -1,5 +1,7 @@
 package com.apress.prospring5.ch6.config;
 
+import com.apress.prospring5.ch6.JdbcSingerDao;
+import com.apress.prospring5.ch6.SingerDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -25,5 +27,12 @@ public class EmbeddedJdbcConfig {
             logger.error("Embedded DataSource bean cannot be created!", e);
             return null;
         }
+    }
+
+    @Bean
+    public SingerDao singerDao(){
+        JdbcSingerDao dao = new JdbcSingerDao();
+        dao.setDataSource(dataSource());
+        return dao;
     }
 }
