@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SingerDao {
     String findNameById(Long id);
+    List<Singer> findAll();
 }
