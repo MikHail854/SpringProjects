@@ -23,6 +23,18 @@ public class Album implements Serializable {
     @Column(name = "version")
     private int version;
 
+    @ManyToOne
+    @JoinColumn(name = "singer_id")
+    private Singer singer;
+
+    public Singer getSinger() {
+        return singer;
+    }
+
+    public void setSinger(Singer singer) {
+        this.singer = singer;
+    }
+
     public Long getId() {
         return id;
     }
@@ -57,6 +69,7 @@ public class Album implements Serializable {
 
     @Override
     public String toString() {
-        return "Album - Id: " + id + ", Title: " + title + ", Release Date: " + releaseDate;
+        return "Album - Id: " + id + ", Singer id: " + singer.getId()
+                + ", Title: " + title + ", Release Date: " + releaseDate;
     }
 }

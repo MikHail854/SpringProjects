@@ -3,6 +3,8 @@ package com.apress.prospring5.ch7.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "singer")
@@ -27,6 +29,27 @@ public class Singer implements Serializable {
     @Column(name = "version")
     private int version;
 
+    @OneToMany(mappedBy = "singer"
+            , cascade = CascadeType.ALL
+            , orphanRemoval = true)
+    private Set<Album> albums = new HashSet<>();
+
+    public boolean addAlbum(Album album){
+        album.setSinger(this);
+        return getAlbums().add(album);
+    }
+
+    public void removeAlbum(Album album){
+        getAlbums().remove(album);
+    }
+
+    public Set<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(Set<Album> albums) {
+        this.albums = albums;
+    }
 
     public Long getId() {
         return id;
