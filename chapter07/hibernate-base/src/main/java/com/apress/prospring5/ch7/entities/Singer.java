@@ -34,12 +34,26 @@ public class Singer implements Serializable {
             , orphanRemoval = true)
     private Set<Album> albums = new HashSet<>();
 
-    public boolean addAlbum(Album album){
+    @ManyToMany
+    @JoinTable(name = "singer_instrument"
+            , joinColumns = @JoinColumn(name = "singer_id"),
+            inverseJoinColumns = @JoinColumn(name = "instrument_id"))
+    private Set<Instrument> instruments = new HashSet<>();
+
+    public Set<Instrument> getInstruments() {
+        return instruments;
+    }
+
+    public void setInstruments(Set<Instrument> instruments) {
+        this.instruments = instruments;
+    }
+
+    public boolean addAlbum(Album album) {
         album.setSinger(this);
         return getAlbums().add(album);
     }
 
-    public void removeAlbum(Album album){
+    public void removeAlbum(Album album) {
         getAlbums().remove(album);
     }
 
