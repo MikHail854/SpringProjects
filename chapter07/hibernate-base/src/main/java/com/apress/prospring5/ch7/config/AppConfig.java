@@ -22,24 +22,21 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class AppConfig {
 
-    private static Logger logger = (Logger) LoggerFactory.getLogger(AppConfig.class);
-
+    private static Logger logger = LoggerFactory.getLogger(AppConfig.class);
 
     @Bean
-    public DataSource dataSource(){
-        try{
+    public DataSource dataSource() {
+        try {
             EmbeddedDatabaseBuilder dbBuilder = new EmbeddedDatabaseBuilder();
             return dbBuilder.setType(EmbeddedDatabaseType.H2)
-                    .addScripts("classpath:sql/schema.sql",
-                            "classpath:sql/test-data.sql").build();
-        } catch (Exception e){
+                    .addScripts("classpath:sql/schema.sql", "classpath:sql/test-data.sql").build();
+        } catch (Exception e) {
             logger.error("Embedded DataSource bean cannot be created!", e);
             return null;
         }
     }
 
-
-    private Properties hibernateProperties(){
+    private Properties hibernateProperties() {
         Properties hibernateProp = new Properties();
         hibernateProp.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         hibernateProp.put("hibernate.format_sql", true);
@@ -51,8 +48,7 @@ public class AppConfig {
         return hibernateProp;
     }
 
-    @Bean
-    public SessionFactory sessionFactory() throws IOException {
+    @Bean public SessionFactory sessionFactory() throws IOException {
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource());
         sessionFactoryBean.setPackagesToScan("com.apress.prospring5.ch7.entities");
@@ -61,10 +57,7 @@ public class AppConfig {
         return sessionFactoryBean.getObject();
     }
 
-    @Bean
-    public PlatformTransactionManager transactionManager() throws IOException{
+    @Bean public PlatformTransactionManager transactionManager() throws IOException {
         return new HibernateTransactionManager(sessionFactory());
     }
-
-
 }
