@@ -36,6 +36,30 @@ public class SingerDaoTest {
     }
 
     @Test
+    public void testUpdate(){
+        Singer singer = singerDao.findById(1L);
+
+        //убедиться, что такой певец существует
+        assertNotNull(singer);
+
+        //убедиться, что получен ожидаемый певец
+        assertEquals("Mayer", singer.getLastName());
+
+        //извлечь альбом
+        Album album = singer.getAlbums().stream().filter(a -> a.getTitle()
+                .equals("Battle Studies"))
+                .findFirst()
+                .get();
+
+        singer.setFirstName("John Clayton");
+        singer.removeAlbum(album);
+        singerDao.save(singer);
+
+        //проверить обновление
+        listSingersWithAlbum(singerDao.findAllWithAlbum());
+    }
+
+    @Test
     public void testInsert() {
         Singer singer = new Singer();
         singer.setFirstName("BB");
