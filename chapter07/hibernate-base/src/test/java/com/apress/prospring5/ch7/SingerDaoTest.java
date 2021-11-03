@@ -36,6 +36,15 @@ public class SingerDaoTest {
     }
 
     @Test
+    public void testDelete(){
+        Singer singer = singerDao.findById(2L);
+        assertNotNull(singer);
+        singerDao.delete(singer);
+
+        listSingersWithAlbum(singerDao.findAllWithAlbum());
+    }
+
+    @Test
     public void testUpdate(){
         Singer singer = singerDao.findById(1L);
 
