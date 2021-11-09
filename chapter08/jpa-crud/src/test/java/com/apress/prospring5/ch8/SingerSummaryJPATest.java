@@ -17,9 +17,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-/**
- * Created by iuliana.cosmina on 4/29/17.
- */
+
 public class SingerSummaryJPATest {
 
     private static Logger logger = LoggerFactory.getLogger(SingerSummaryJPATest.class);
