@@ -37,7 +37,23 @@ public class SingerJPATest {
     }
 
     @Test
-    public void testInsert(){
+    public void testUpdate() {
+        Singer singer = singerService.findById(1L);
+        assertNotNull(singer);
+        assertEquals("Mayer", singer.getLastName());
+
+        Album album = singer.getAlbums().stream().filter(a -> a.getTitle()
+                .equals("Battle Studies"))
+                .findFirst().get();
+        singer.setFirstName("John Clayton");
+        singer.removeAlbum(album);
+        singerService.save(singer);
+        listSingersWithAlbum(singerService.findAllWithAlbum());
+    }
+
+
+    @Test
+    public void testInsert() {
         Singer singer = new Singer();
         singer.setFirstName("BB");
         singer.setLastName("Kind");
@@ -45,7 +61,7 @@ public class SingerJPATest {
 
         Album album = new Album();
         album.setTitle("My Kind of Blues");
-        album.setReleaseDate(new  java.sql.Date(new GregorianCalendar(1962, 3, 20).getTime().getTime()));
+        album.setReleaseDate(new java.sql.Date(new GregorianCalendar(1962, 3, 20).getTime().getTime()));
         singer.addAlbum(album);
         singerService.save(singer);
         assertNotNull(singer.getId());
@@ -57,12 +73,11 @@ public class SingerJPATest {
 
 
     @Test
-    public void testFindById(){
+    public void testFindById() {
         Singer singer = singerService.findById(1L);
         assertNotNull(singer);
         logger.info(singer.toString());
     }
-
 
 
     @Test
