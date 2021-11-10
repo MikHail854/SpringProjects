@@ -36,6 +36,25 @@ public class SingerJPATest {
         assertNotNull(singerService);
     }
 
+    @Test
+    public void testInsert(){
+        Singer singer = new Singer();
+        singer.setFirstName("BB");
+        singer.setLastName("Kind");
+        singer.setBirthDate(new Date(new GregorianCalendar(1940, 8, 16).getTime().getTime()));
+
+        Album album = new Album();
+        album.setTitle("My Kind of Blues");
+        album.setReleaseDate(new  java.sql.Date(new GregorianCalendar(1962, 3, 20).getTime().getTime()));
+        singer.addAlbum(album);
+        singerService.save(singer);
+        assertNotNull(singer.getId());
+
+        List<Singer> singers = singerService.findAllWithAlbum();
+        assertEquals(4, singers.size());
+        listSingersWithAlbum(singers);
+    }
+
 
     @Test
     public void testFindById(){
