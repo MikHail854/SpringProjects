@@ -37,6 +37,14 @@ public class SingerJPATest {
     }
 
     @Test
+    public void testDelete(){
+        Singer singer = singerService.findById(2L);
+        assertNotNull(singer);
+        singerService.delete(singer);
+        listSingersWithAlbum(singerService.findAllWithAlbum());
+    }
+
+    @Test
     public void testUpdate() {
         Singer singer = singerService.findById(1L);
         assertNotNull(singer);
